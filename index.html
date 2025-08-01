@@ -32,16 +32,30 @@
     #message { margin-top: 20px; font-size: 20px; }
   </style>
   <script>
-    // iOS input fix for web app mode
+    // Touchstart workaround for iOS keyboard bug in standalone mode
     document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener('touchstart', function() {}, true);
+
+      // Add event listener to button
+      const btn = document.getElementById('checkBtn');
+      if (btn) {
+        btn.addEventListener('click', checkUser);
+      }
+
+      // Focus input after load (helps iOS trigger keyboard)
+      const emailInput = document.getElementById("email");
+      if (emailInput) {
+        setTimeout(() => {
+          emailInput.focus();
+        }, 500);
+      }
     });
   </script>
 </head>
 <body>
   <h2>User Email</h2>
-  <input type="email" id="email" placeholder="Enter your email" />
-  <button onclick="checkUser()">Check</button>
+  <input type="text" id="email" inputmode="email" autocomplete="email" placeholder="Enter your email" />
+  <button id="checkBtn">Check</button>
   <p id="message"></p>
 
   <script>
@@ -92,18 +106,6 @@
         document.getElementById('message').innerText = "Email not found.";
       }
     }
-  </script>
-
-  <script>
-    // Ensure input focus after load (helps trigger keyboard on iOS)
-    window.onload = function () {
-      const emailInput = document.getElementById("email");
-      if (emailInput) {
-        setTimeout(() => {
-          emailInput.focus();
-        }, 500);
-      }
-    };
   </script>
 </body>
 </html>
