@@ -32,8 +32,10 @@
     #message { margin-top: 20px; font-size: 20px; }
   </style>
   <script>
-    // iOS Standalone Mode Input Fix
-    document.addEventListener('touchstart', function() {}, true);
+    // iOS input fix for web app mode
+    document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('touchstart', function() {}, true);
+    });
   </script>
 </head>
 <body>
@@ -90,6 +92,18 @@
         document.getElementById('message').innerText = "Email not found.";
       }
     }
+  </script>
+
+  <script>
+    // Ensure input focus after load (helps trigger keyboard on iOS)
+    window.onload = function () {
+      const emailInput = document.getElementById("email");
+      if (emailInput) {
+        setTimeout(() => {
+          emailInput.focus();
+        }, 500);
+      }
+    };
   </script>
 </body>
 </html>
