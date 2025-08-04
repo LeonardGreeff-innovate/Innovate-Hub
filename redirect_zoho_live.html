@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Redirecting…</h2>
+  <p>Please wait while we track your activity.</p>
+  <script>
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    const user = window.name || "unknown";
+
+    // STEP 1: Log to your Apps Script
+    const logUrl = `https://script.google.com/macros/s/AKfycbw7dh4dMTRbdiB8uTVBYD0gPpuUAKTcHZZpy3H2xRQN/dev?tab=${encodeURIComponent(tab)}&user=${encodeURIComponent(user)}`;
+    fetch(logUrl, { method: "GET", mode: "no-cors" });
+
+    // STEP 2: Redirect to Zoho form
+    let redirectUrl = "";
+
+    switch (tab) {
+      case "IncidentForm":
+        redirectUrl = "https://zfrmz.eu/CvRGemPOm65m9ld37T5c";
+        break;
+      case "ObservationForm":
+        redirectUrl = "https://forms.zohopublic.eu/glosscalm01/form/SafetyObservationForm/formperma/YKvDO5hAByNXpX-zM2nzgYsrB9tUB1mdpp8FNHo2Hf0";
+        break;
+      default:
+        redirectUrl = "https://forms.zohopublic.eu/glosscalm01"; // fallback
+    }
+
+    // Wait a moment to let logging happen
+    setTimeout(() => {
+      window.location.href = redirectUrl;
+    }, 500);
+  </script>
+</body>
+</html>
