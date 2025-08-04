@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,28 +19,29 @@
     const tab = new URLSearchParams(window.location.search).get("tab");
     const user = window.name || "unknown";
 
-    // STEP 1: Log to your Apps Script
-    const logUrl = `https://script.google.com/macros/s/AKfycbw7dh4dMTRbdiB8uTVBYD0gPpuUAKTcHZZpy3H2xRQN/dev?tab=${encodeURIComponent(tab)}&user=${encodeURIComponent(user)}`;
+    // STEP 1: Log to your Google Sheet via Apps Script
+    const logUrl = `https://script.google.com/macros/s/AKfycbwrNRWMGsDoZ8Rgb0613oZxFpAuBbVfZtCNe0dEpxMwfoAQmb0vS0M9ChyxHaUXbQve/exec?tab=${encodeURIComponent(tab)}&user=${encodeURIComponent(user)}`;
     fetch(logUrl, { method: "GET", mode: "no-cors" });
 
     // STEP 2: Redirect to Zoho form
     let redirectUrl = "";
 
     switch (tab) {
-      case "IncidentForm":
+      case "Incident & Accident Form":
         redirectUrl = "https://zfrmz.eu/CvRGemPOm65m9ld37T5c";
         break;
-      case "ObservationForm":
+      case "Safety Observation Form":
         redirectUrl = "https://forms.zohopublic.eu/glosscalm01/form/SafetyObservationForm/formperma/YKvDO5hAByNXpX-zM2nzgYsrB9tUB1mdpp8FNHo2Hf0";
         break;
       default:
         redirectUrl = "https://forms.zohopublic.eu/glosscalm01"; // fallback
     }
 
-    // Wait a moment to let logging happen
+    // Allow brief delay for logging to complete
     setTimeout(() => {
       window.location.href = redirectUrl;
     }, 500);
   </script>
 </body>
 </html>
+
